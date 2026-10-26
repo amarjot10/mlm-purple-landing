@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'mlm2.css' %}" />
+    <link rel="stylesheet" href="{% static 'mlm_page_2.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Faster+One&family=Plaster&display=swap');
+
+      body {
+        background-color: #0f051d;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+      .hero-bg img {
+        filter: drop-shadow(0px 0px 50px #2b174bb9);
+      }
+      .button {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 1;
+        border: none !important;
+        font-size: medium;
+        padding: 15px 30px !important;
+        /* box-shadow: 0px 0px 10px #2a7a8a; */
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgba(13, 20, 174, 1) 0%,
+          rgb(101, 66, 131) 90%
+        );
+      }
+
+      .button::before,
+      .button::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        transform: skew(15deg);
+        transition: all 0.5s;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .button::before {
+        left: -10px;
+        background: #4528a1;
+      }
+
+      .button::after {
+        right: -10px;
+        background: #6048af;
+      }
+
+      .button:hover::before,
+      .button:hover::after {
+        width: 58%;
+      }
+
+      .li {
+        padding: 5px 30px;
+        font-size: 16px;
+        cursor: pointer;
+        color: black;
+        position: relative;
+        transition: transform 0.5s ease;
+        transform-origin: left;
+        z-index: 1;
+      }
+      .li::after {
+        content: "";
+        position: absolute;
+        background-color: #34275f;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s ease;
+      }
+      .li:hover::after {
+        transform: scaleX(1);
+        transition: transform 0.5s ease;
+        transform-origin: left;
+      }
+      .hero_col h1 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .floating-image {
+        position: relative;
+        animation: floatAnimation 3s ease-in-out infinite;
+      }
+
+      @keyframes floatAnimation {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-25px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      .primary-color {
+        color: #b190e0;
+      }
+      .metaCard {
+        background-color: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: none !important;
+        border-radius: 20px !important;
+        transition: all 500ms ease;
+      }
+      .metaCard button {
+        background: linear-gradient(233deg, #1f3336, #3131318e);
+      }
+      .metaCard:hover i {
+        transform: scale(1.1);
+        transition: all 500ms ease;
+      }
+      .metaCard:hover {
+        box-shadow: 0px 0px 10px #190f3bbe !important;
+        border: none !important;
+        transition: all 500ms ease;
+      }
+      .metaCard h3 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .nftCard {
+        background: linear-gradient(233deg, #ffffff1f, #2e223ce3, #2d1846e3);
+        backdrop-filter: blur(30px);
+        border-radius: 20px !important;
+      }
+      .nftCard img {
+        object-fit: cover;
+        width: 100%;
+        height: 250px;
+      }
+      .card_icon {
+        background-color: #29728136;
+        padding: 20px 21px;
+      }
+      .about_col h1 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .about_col img {
+        filter: drop-shadow(0px 0px 50px #8447a762);
+      }
+      .social_icon {
+        background: -webkit-linear-gradient(#917add, #424242);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .footer_li {
+        color: #917add !important;
+      }
+      .footer_li:hover {
+        color: #735eb8 !important;
+      }
+      .package_bg {
+        background: url("{% static 'assets/images/bg-asset/image-6.png' %}");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .package_card {
+        background: linear-gradient(233deg, #ffffff1f, #2e223ce3, #2d1846e3);
+        backdrop-filter: blur(100px) !important;
+        border: none !important;
+        border-radius: 25px !important;
+        transition: all 500ms ease !important;
+      }
+      .package_card i {
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgb(47, 55, 209) 0%,
+          rgb(145, 73, 207) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .community_adrs {
+        background-color: rgb(61 43 84 / 32%);
+      }
+      .tmln__item {
+        border-top: 2px dotted white;
+        padding-top: 30px;
+      }
+      .tmln__item--bg-dark::after,
+      .tmln__item--bg-lght::after {
+        content: "";
+        position: absolute;
+        padding: 10px 10px;
+        border-radius: 20%;
+        border: 3px solid #34275f;
+        background-color: #190f3b;
+        left: 0;
+        top: -14px;
+      }
+      .tmln__item--bg-dark {
+        padding: 15px;
+        margin-left: 26px;
+
+        background: linear-gradient(233deg, #ffffff1f, #3f2d55e3, #2d1846e3);
+        color: white !important;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+      .tmln__item--bg-lght {
+        padding: 15px;
+        margin-left: 26px;
+
+        background: linear-gradient(233deg, #ffffff34, #583e75e3, #6a439be3);
+        color: rgb(216, 216, 216) !important;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+      #Ecosystem {
+        overflow-x: hidden;
+      }
+      .Eclipse {
+        left: 0;
+        z-index: -1;
+      }
+      .Eclipse-2 {
+        right: 0;
+        z-index: -1;
+      }
+
+      @media only screen and (min-width: 52px) and (max-width: 992px) {
+        .navbar_body {
+          background-color: #000000;
+        }
+      }
+    </style>
+    <style>
+      .custom-shape-divider-bottom-1693304418 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+      }
+
+      .custom-shape-divider-bottom-1693304418 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 78px;
+      }
+
+      .custom-shape-divider-bottom-1693304418 .shape-fill {
+        fill: #190f3b;
+      }
+      .shape {
+        background: rgb(34, 193, 195);
+        background: linear-gradient(
+          0deg,
+          rgba(34, 193, 195, 0) 0%,
+          rgba(25, 15, 59, 1) 100%
+        );
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid p-0">
+      <div class="position-relative">
+        <img
+          src="eclipse.jpg"
+          class="img-fluid position-fixed Eclipse"
+          alt=""
+        />
+        <img
+          src="eclipse.jpg"
+          class="img-fluid position-fixed Eclipse-2"
+          alt=""
+        />
+      </div>
+      <div id="home">
+        <header
+          id="header"
+          class="header navbar navbar-expand-lg px-lg-5 py-3 px-3 z-3"
+        >
+          <div class="container-fluid px-0">
+            <a href="/metaverse_3" class="navbar-brand pe-3">
+              <img src="meta-logo.png" width="180" class="img-fluid" />
+            </a>
+            <div id="navbarNav" class="offcanvas offcanvas-end">
+              <div class="offcanvas-header border-bottom navbar_body">
+                <h5 class="offcanvas-title text-white">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body navbar_body">
+                <ul class="navbar-nav mx-auto gap-3 mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a
+                      href="/metaverse_3"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="#Ecosystem"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Eco System</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="/packages_2"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Packages</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a href="/about_2" class="nav-link li px-3 py-1 text-white"
+                      >About us</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="navbar-toggler"
+              style="filter: invert(1)"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a
+              href="../../../loginpage"
+              class="d-none d-lg-inline-flex text-decoration-none border rounded-5 px-5 py-2 text-white fw-semibold button"
+              target="_blank"
+              rel="noopener"
+            >
+              Login
+            </a>
+          </div>
+        </header>
+        <div class="container-fluid mt-lg-0 mt-md-0 mt-4">
+          <div class="container-xxl">
+            <div class="row mx-0 p-lg-5 px-0">
+              <div
+                class="col-lg-6 p-lg-4 px-2 hero hero_col"
+                data-aos="fade-right"
+                data-aos-duration="1500"
+              >
+                <p class="mb-2 primary-color fs-5 text-lg-start text-md-start">
+                  Welcome to
+                </p>
+                <h1
+                  class="fw-bolder mb-0 mt-0 text-white text-lg-start text-md-start display-2"
+                >
+                  BST Meta
+                </h1>
+                <h2
+                  class="mb-2 mt-2 text-white text-opacity-75 text-lg-start text-md-start"
+                >
+                  Unleash Success in a New Dimension
+                </h2>
+                <p
+                  class="mt-3 fs-5 text-white-50 text-lg-start text-md-start mb-4"
+                >
+                  Connecting Ambitions, One Virtual Handshake at a Time
+                </p>
+                <div
+                  class="d-lg-flex align-items-center d-md-flex gap-lg-3 gap-md-3 gap-3 d-grid mt-4 pt-1"
+                >
+                  <a
+                    href="/register"
+                    class="btn btn-lg text-decoration-none border rounded-5 px-4 py-2 text-white button"
+                  >
+                    Explore more
+                  </a>
+                  <a
+                    href=" "
+                    class="btn btn-lg text-decoration-none border rounded-5 px-4 py-2 text-white button"
+                  >
+                    View in OPENSEA
+                  </a>
+                </div>
+              </div>
+              <div
+                class="col-lg mt-lg-4 px-lg-5 mt-4"
+                data-aos="zoom-in"
+                data-aos-duration="1200"
+              >
+                <div class="hero-bg">
+                  <img
+                    id="image-121-6051"
+                    alt="headphone-left"
+                    src="image-17.png"
+                    class="img-fluid floating-image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mx-0 px-0 position-relative">
+          <div class="custom-shape-divider-bottom-1693304418 px-0">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                opacity=".25"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                opacity=".5"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
+          <div class="p-5 shape position-absolute"></div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 p-lg-5 p-md-4 px-0 mt-5 position-relative">
+            <div class="col-lg col-md-6 col-12 mt-lg-5 mt-3">
+              <div
+                class="card px-2 py-3 shadow-lg metaCard h-100"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                <div class="card-body p-3">
+                  <div class="">
+                    <i
+                      class="fa-regular fa-square-plus primary-color card_icon fs-5 shadow rounded-circle"
+                    ></i>
+                    <div class="mt-4">
+                      <h3 class="text-white fw-semibold">Create an Account</h3>
+                      <p class="text-white-50 pt-1 mb-0">
+                        Registraion is totally free.You can create your account
+                        with valid email ,mobile and etc.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg col-md-6 col-12 mt-lg-5 mt-3">
+              <div
+                class="card px-2 py-3 shadow-lg metaCard h-100"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <div class="card-body p-3">
+                  <div class="">
+                    <i
+                      class="fa-solid fa-wallet primary-color card_icon fs-5 shadow rounded-circle"
+                    ></i>
+                    <div class="mt-4">
+                      <h3 class="text-white fw-semibold">Make Topup</h3>
+                      <p class="text-white-50 pt-1 mb-0">
+                        Topup With Any of Above Package As Per Our Choice
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg col-md-6 col-12 mt-lg-5 mt-3">
+              <div
+                class="card px-2 py-3 shadow-lg metaCard h-100"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
+                <div class="card-body p-3">
+                  <div class="">
+                    <i
+                      class="fa-solid fa-sack-dollar primary-color card_icon fs-5 shadow rounded-circle"
+                    ></i>
+                    <div class="mt-4">
+                      <h3 class="text-white fw-semibold">Start Earnings</h3>
+                      <p class="text-white-50 pt-1 mb-0">
+                        Get Profit As Per Your Choice.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-lg-block d-md-block d-none">
+              <img
+                src="{% static 'assets/images/bg-asset/image-5.png' %}"
+                class="img-fluid mt-5 position-absolute asset_2 floating-image"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="Ecosystem" class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 p-lg-5 p-md-4 px-0 mt-lg-0 mt-md-0 mt-5">
+            <div class="text-center">
+              <h1 class="text-white fw-semibold mt-4 display-5">
+                Metaverse Ecosystem
+              </h1>
+            </div>
+            <div
+              class="Swiper p-3 mt-5"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <div class="swiper-wrapper">
+                <div class="swiper-slide h-100">
+                  <div class="card text-center h-100 nftCard p-4 border-0">
+                    <div class="card-body p-0">
+                      <img
+                        src="art_01.jpg"
+                        class="img-fluid rounded-4 shadow"
+                        alt=""
+                      />
+                      <h3 class="text-white fw-semibold my-3 text-uppercase">
+                        Metaverse
+                      </h3>
+                      <p class="text-white-50 mb-0">
+                        Metaverse offers a shared digital space where people can
+                        interact, socialize and engage in various.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card text-center h-100 nftCard p-4 border-0">
+                    <div class="card-body p-0">
+                      <img
+                        src="art_02.jpg"
+                        class="img-fluid rounded-4 shadow"
+                        alt=""
+                      />
+                      <h3 class="text-white fw-semibold my-3 text-uppercase">
+                        NFT MarketPlace
+                      </h3>
+                      <p class="text-white-50 mb-0">
+                        An NFT marketplace is a digital platform where
+                        individuals can buy, sell, and trade digital assets
+                        known as NFTs.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card text-center h-100 nftCard p-4 border-0">
+                    <div class="card-body p-0">
+                      <img
+                        src="art_03.jpg"
+                        class="img-fluid rounded-4 shadow"
+                        alt=""
+                      />
+                      <h3 class="text-white fw-semibold my-3 text-uppercase">
+                        Land NFT
+                      </h3>
+                      <p class="text-white-50 mb-0">
+                        Discover unique digital worlds through Land NFTs –
+                        verifiable, representing ownership of virtual land
+                        spaces.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card text-center h-100 nftCard p-4 border-0">
+                    <div class="card-body p-0">
+                      <img
+                        src="art_04.jpg"
+                        class="img-fluid rounded-4 shadow"
+                        alt=""
+                      />
+                      <h3 class="text-white fw-semibold my-3 text-uppercase">
+                        NFT Art
+                      </h3>
+                      <p class="text-white-50 mb-0">
+                        NFT Art, or Non-Fungible Token Art, represents a
+                        revolutionary fusion of art and blockchain technology.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <a
+                href=" "
+                class="btn btn-lg text-decoration-none border rounded-5 px-4 py-2 text-white button mt-5"
+              >
+                View in OPENSEA
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl my-4">
+          <div
+            class="row mx-0 p-lg-5 p-md-4 px-0 position-relative mt-lg-0 mt-md-0 mt-5"
+          >
+            <div class="">
+              <img
+                src="{% static 'assets/images/bg-asset/image-5.png' %}"
+                class="img-fluid mt-5 position-absolute asset_1 floating-image"
+                alt=""
+              />
+              <img
+                src="{% static 'assets/images/bg-asset/image-5.png' %}"
+                class="img-fluid mt-5 position-absolute asset_2 floating-image"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="500"
+            >
+              <h1 class="primary-color fw-bolder display-3">4,000+</h1>
+              <p class="text-white text-opacity-75 mt-3">Wallets Connected</p>
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
+              <h1 class="primary-color fw-bolder display-3">20,000+</h1>
+              <p class="text-white text-opacity-75 mt-3">
+                Collections Indexed every 5 mins.
+              </p>
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <h1 class="primary-color fw-bolder display-3">2.5x</h1>
+              <p class="text-white text-opacity-75 mt-3">
+                Difference in Floor & Estimated Value
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 align-items-center p-lg-5 p-md-4 px-0">
+            <div
+              class="col-lg-6 col-md-6 col-12 about_col mt-lg-0 mt-md-0 mt-5"
+            >
+              <img
+                data-aos="fade-right"
+                data-aos-duration="500"
+                src="meta-about-8.png"
+                class="img-fluid"
+                width="500"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg-6 col-md-6 col-12 about_col mb-4 mt-lg-0 mt-md-0 mt-5"
+            >
+              <div class="mt-3 pt-2">
+                <p
+                  class="fs-5 primary-color"
+                  data-aos="fade-left"
+                  data-aos-duration="500"
+                >
+                  Welcome to BST Meta
+                </p>
+                <h1
+                  class="text-white fw-semibold mt-3 display-4"
+                  data-aos="fade-left"
+                  data-aos-duration="1000"
+                >
+                  About us
+                </h1>
+                <p
+                  class="text-white-50 fs-5 mt-3"
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                >
+                  Step into a revolutionary digital realm where cutting-edge
+                  technology intersects with the dynamic world of multi-level
+                  marketing. Our BST Meta is a groundbreaking platform that
+                  redefines how businesses and individuals engage with network
+                  marketing, leveraging the power of virtual reality,
+                  blockchain, and social interaction.
+                </p>
+                <button
+                  class="btn btn-lg button border border-white rounded-5 px-5 mt-4 text-white"
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                >
+                  See More
+                </button>
+              </div>
+            </div>
+            <!-- <div
+              class="col-lg-6 col-12"
+              data-aos="fade-left"
+              data-aos-duration="500"
+            >
+              <div class="card p-4 metaCard shadow h-100">
+                <div class="card-body p-2">
+                  <div class="d-flex gap-2 align-items-center">
+                    <img
+                      src="{% static 'assets/images/about/meta-about-2.png' %}"
+                      class="img-fluid"
+                      width="80"
+                      alt=""
+                    />
+                    <h3 class="primary-color fw-semibold">
+                      Empowering Connections
+                    </h3>
+                  </div>
+                  <p class="text-white-50 text-opacity-75 mb-0 mt-4">
+                    Our metaverse is built on the foundation of fostering
+                    connections. Through immersive virtual spaces, you can
+                    connect with fellow network marketers, mentors, and
+                    prospects from around the globe. Experience real-time
+                    interactions that transcend geographical barriers, enabling
+                    you to build meaningful relationships that drive your BST
+                    Meta journey forward.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-lg-6 col-12 mt-lg-0 mt-md-0 mt-3"
+              data-aos="fade-left"
+              data-aos-duration="1500"
+            >
+              <div class="card p-4 metaCard shadow h-100">
+                <div class="card-body p-2">
+                  <div class="d-flex gap-2 align-items-center">
+                    <img
+                      src="{% static 'assets/images/about/meta-about-3.png' %}"
+                      class="img-fluid"
+                      width="80"
+                      alt=""
+                    />
+                    <h3 class="primary-color fw-semibold">
+                      Recognition and Rewards
+                    </h3>
+                  </div>
+                  <p class="text-white-50 text-opacity-75 mb-0 mt-4">
+                    Celebrate your achievements like never before. In the BST
+                    Meta, your accomplishments are acknowledged in grand virtual
+                    ceremonies attended by peers and mentors. Receive digital
+                    badges, tokens, and exclusive virtual items as rewards, all
+                    securely stored on the blockchain to showcase your journey
+                    towards success.
+                  </p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div id="roadMap" class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 p-lg-5 p-md-4 p-3 my-5">
+            <p class="primary-color ps-0">BST Meta</p>
+            <h1 class="text-white ps-0 text-uppercase fw-semibold">Road Map</h1>
+            <p class="ps-0 mt-3 fs-5 text-white text-opacity-75">
+              Cryptocurrencies are currently used more frequently and are
+              gaining acceptance as a valid form of payment for transactions.
+            </p>
+            <div
+              class="swiper py-4 px-lg-2 px-2 mt-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
+              <div class="swiper-wrapper">
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q4</p>
+                    <h3 class="tmln__item-headline text-white">
+                      Research & Development
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Oct-Dec 22
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q1</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      Pre sale phase
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Jan-Mar 23
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q2</p>
+                    <h3 class="tmln__item-headline text-white">
+                      List on exchange
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Apr-June 23
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q3</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      Utility
+                    </h3>
+                    <p class="mt-3 p-2">
+                      July - Sept 23
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q4</p>
+                    <h3 class="tmln__item-headline text-white">Gaming</h3>
+                    <p class="mt-3 p-2">
+                      Oct-Dec 23
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q1</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      More than five exchange
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Jan-March 24
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q2</p>
+                    <h3 class="tmln__item-headline text-white">NFT</h3>
+                    <p class="mt-3 p-2">
+                      Apr-June 24
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q3</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      Blockchain
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Jul-Dec 24
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q1-Q2</p>
+                    <h3 class="tmln__item-headline text-white">
+                      Self Exchange
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Jan - June 25
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q3-Q4</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      Decentralize Wallet
+                    </h3>
+                    <p class="mt-3 p-2">
+                      Jul-Dec 25
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q1-Q2</p>
+                    <h3 class="tmln__item-headline text-white">Metaverse</h3>
+                    <p class="mt-3 p-2">
+                      Jan - June 26
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-lght">
+                    <p class="fs-5 fw-semibold">Q1-Q4</p>
+                    <h3 class="tmln__item-headline text-white text-opavity-50">
+                      More than 100 Exchange
+                    </h3>
+                    <p class="mt-3 p-2">
+                      2027
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+                <div class="swiper-slide tmln__item h-100">
+                  <li class="tmln__item--bg-dark">
+                    <p class="fs-5 fw-semibold">Q1-Q4</p>
+                    <h3 class="tmln__item-headline text-white">
+                      World No. 1 Exchange
+                    </h3>
+                    <p class="mt-3 p-2">
+                      2028
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </p>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            class="px-lg-5 py-lg-4 p-md-4 p-3 mt-5 package_bg"
+          >
+            <div class="row d-flex align-items-center justify-content-between">
+              <div
+                class="col-lg col-md col-12"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                <p class="fs-5 mb-2 primary-color">Choose investment amount</p>
+                <h1 class="text-white fw-semibold ps-0 mt-3 mb-4">Packages</h1>
+              </div>
+              <div class="col-lg col-md col-12 d-flex justify-content-lg-end">
+                <button
+                  class="btn button border border-white rounded-5 px-4 text-white"
+                  data-aos="fade-left"
+                  data-aos-duration="1000"
+                >
+                  See More
+                </button>
+              </div>
+            </div>
+            <div class="Swiper py-4 px-lg-2 px-2">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide h-100">
+                  <div
+                    class="card p-4 rounded-4 shadow-sm border-0 h-100 package_card"
+                  >
+                    <div class="card-body d-flex flex-column p-0">
+                      <div
+                        class="d-flex align-items-center justify-content-between gap-3"
+                      >
+                        <h2 class="fw-semibold mb-0 text-white text-opacity-75">
+                          Micro
+                        </h2>
+                        <i class="fa-solid fa-star fs-3"></i>
+                      </div>
+                      <div class="mt-1">
+                        <div
+                          class="d-flex align-items-end border-bottom border-white border-opacity-10 pt-4 pb-3"
+                        >
+                          <h2
+                            class="fw-semibold mb-0 text-white text-opacity-75"
+                          >
+                            $50
+                          </h2>
+                          <p class="ms-2 mb-1 text-white text-opacity-75">
+                            MINIMUM INVESTMENT
+                          </p>
+                        </div>
+                        <div class="d-flex align-items-end pt-3">
+                          <h2
+                            class="fw-semibold mb-0 text-white text-opacity-75"
+                          >
+                            $249
+                          </h2>
+                          <p class="ms-2 mb-1 text-white text-opacity-75">
+                            MAXIMUM INVESTMENT
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        class="border border-secondary border-opacity-50 px-3 py-4 shadow bg-black bg-opacity-25 rounded-4 mt-4"
+                      >
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="heading mb-0 text-white text-opacity-50">
+                            RETURN ON INVESTMENT
+                          </p>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <h5 class="mb-0 text-white text-opacity-50">0.25%</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="mb-0 text-white text-opacity-50">DAILY</p>
+                        </div>
+                      </div>
+                      <div class="d-grid">
+                        <button
+                          class="btn bg-black bg-opacity-25 shadow border border-white border-opacity-25 py-2 rounded-5 mt-4"
+                        >
+                          <a
+                            href="../../../loginpage"
+                            class="text-decoration-none text-white"
+                          >
+                            Get Started
+                          </a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div
+                    class="card p-4 rounded-4 shadow-sm border-0 h-100 package_card"
+                  >
+                    <div class="card-body d-flex flex-column p-0">
+                      <div
+                        class="d-flex align-items-center justify-content-between gap-3"
+                      >
+                        <h2 class="fw-semibold mb-0 text-white text-opacity-75">
+                          Mini
+                        </h2>
+                        <i class="fa-solid fa-medal fs-3"></i>
+                      </div>
+                      <div class="mt-1">
+                        <div
+                          class="d-flex align-items-end border-bottom border-white border-opacity-10 pt-4 pb-3"
+                        >
+                          <h2
+                            class="fw-semibold mb-0 text-white text-opacity-75"
+                          >
+                            $250
+                          </h2>
+                          <p class="ms-2 mb-1 text-white text-opacity-75">
+                            MINIMUM INVESTMENT
+                          </p>
+                        </div>
+                        <div class="d-flex align-items-end pt-3">
+                          <h2
+                            class="fw-semibold mb-0 text-white text-opacity-75"
+                          >
+                            $499
+                          </h2>
+                          <p class="ms-2 mb-1 text-white text-opacity-75">
+                            MAXIMUM INVESTMENT
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        class="border border-secondary border-opacity-50 px-3 py-4 shadow bg-black bg-opacity-25 rounded-4 mt-4"
+                      >
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="heading mb-0 text-white text-opacity-50">
+                            RETURN ON INVESTMENT
+                          </p>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <h5 class="mb-0 text-white text-opacity-50">0.30%</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="mb-0 text-white text-opacity-50">DAILY</p>
+                        </div>
+                      </div>
+                      <div class="d-grid">
+                        <button
+                          class="btn bg-black bg-opacity-25 shadow border border-white border-opacity-25 py-2 rounded-5 mt-4"
+                        >
+                          <a
+                            href="../../../loginpage"
+                            class="text-decoration-none text-white"
+                          >
+                            Get Started
+                          </a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div
+                    class="card p-4 rounded-4 shadow border-0 h-100 package_card"
+                  >
+                    <div class="card-body d-flex flex-column p-0">
+                      <div
+                        class="d-flex align-items-center justify-content-between gap-3"
+                      >
+                        <h2 class="fw-semibold mb-0 text-white text-opacity-75">
+                          Classic
+                        </h2>
+                        <i class="fa-solid fa-trophy fs-3"></i>
+                      </div>
+                      <div class="pt-2 mt-4 mb-3">
+                        <h2 class="mb-0 fw-semibold text-white text-opacity-75">
+                          $500
+                        </h2>
+                        <h2
+                          class="mb-0 fw-semibold mt-3 text-white text-opacity-75"
+                        >
+                          & Above
+                        </h2>
+                      </div>
+                      <div
+                        class="border border-secondary border-opacity-50 px-3 py-4 shadow bg-black bg-opacity-25 rounded-4 mt-3"
+                      >
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="heading text-white text-opacity-50 mb-0">
+                            RETURN ON INVESTMENT
+                          </p>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <h5 class="text-white text-opacity-50 mb-0">0.50%</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                          <i
+                            class="fa-solid fa-circle-check text-white text-opacity-50 fs-5 rounded-circle"
+                          ></i>
+                          <p class="mb-0 text-white text-opacity-50">DAILY</p>
+                        </div>
+                      </div>
+                      <div class="d-grid mt-auto">
+                        <button
+                          class="btn bg-black bg-opacity-25 shadow border border-white border-opacity-25 py-2 rounded-5 mt-4"
+                        >
+                          <a
+                            href="../../../loginpage"
+                            class="text-decoration-none text-white"
+                          >
+                            Get Started
+                          </a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl mt-5">
+          <div
+            class="row mx-0 align-items-center p-lg-5 p-md-4 p-4 bg-secondary bg-opacity-10 rounded-5"
+          >
+            <div class="col-lg-6 col-md-6 col-12">
+              <h1 class="text-white fw-semibold display-4">BST Meta</h1>
+              <h1 class="text-white fw-semibold pb-2">Community Address.</h1>
+              <p class="fs-5 fw-semibold text-white-50 mt-4 mb-0 pb-3">
+                Join our community and follow us on Social Media platform if
+                you're interested.
+              </p>
+              <div
+                class="d-flex align-items-center flex-row flex-md-row flex-column flex-wrap gap-3 mt-4 mb-lg-0 mb-md-0 mb-4 justify-content-between p-lg-3 p-md-3 px-2 py-3 rounded-5 community_adrs"
+              >
+                <p class="text-white text-opacity-75 text-wrap mb-0 ms-2">
+                  uui4g3iug4iu3b4i3u5gi4g5u
+                </p>
+                <button
+                  class="btn btn-lg text-white button rounded-5 py-2 px-4"
+                >
+                  Copy Address
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 d-flex justify-content-end">
+              <div class="about_col">
+                <img width="350" src="Bitcoin-3.png" class="img-fluid" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        data-aos="fade"
+        data-aos-duration="1000"
+        class="footer container-fluid px-0 bg-secondary bg-opacity-10 pt-5 mt-5"
+      >
+        <div class="container-xxl px-0">
+          <div class="row mx-0 pb-5 px-lg-5 px-3">
+            <div class="col-lg-4 col-md-6">
+              <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+                <img src="meta-logo.png" width="180" alt="BST Meta" />
+              </div>
+              <p class="text-white text-opacity-75 pb-lg-3 mb-4">
+                We make it easy to Discover, Invest and manage all your NFTs at
+                one place.
+              </p>
+              <div class="d-flex gap-3">
+                <a href="">
+                  <i class="fab fa-fw fa-facebook-square fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-linkedin-in fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-twitter fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-instagram fs-2 social_icon"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0"
+            >
+              <div id="footer-links" class="row">
+                <div class="col-lg col">
+                  <div
+                    id="useful-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg col">
+                  <div
+                    id="social-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg col">
+                  <div
+                    id="social-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="nav d-block fs-xs text-center p-3">
+            <span class="text-white">© All rights reserved. Made by </span>
+            <a class="nav-link d-inline-block primary-color p-0" href=" "
+              >BST Meta</a
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        // Optional parameters
+
+        direction: "horizontal",
+        // loop: true,
+
+        // effect: "coverflow",
+        // coverflowEffect: {
+        //   rotate: 30,
+        //   slideShadows: false,
+        // },
+
+        // autoplay: {
+        //   delay: 4000,
+        // },
+        autoHeight: true,
+
+        // centeredSlides: true,
+        // centeredSlidesBounds: true,
+
+        slidesPerView: 5,
+        spaceBetween: 10,
+        // Responsive breakpoints
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 0,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 0,
+          },
+        },
+      });
+      
+      const sswiper = new Swiper(".Swiper", {
+        // Optional parameters
+        direction: "horizontal",
+
+        autoplay: {
+          delay: 4000,
+        },
+        autoHeight: true,
+
+        slidesPerView: 5,
+        spaceBetween: 10,
+        // Responsive breakpoints
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 40,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 70,
+          },
+        },
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+    <script>
+      VANTA.TOPOLOGY({
+        el: "#home",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x2e1d78,
+        backgroundColor: 0x0f051d,
+      });
+    </script>
+  </body>
+</html>

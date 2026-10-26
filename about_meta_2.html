@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'mlm2.css' %}" />
+    <link rel="stylesheet" href="{% static 'mlm_page_2.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+      body {
+        background-color: #0f051d;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+      .hero-bg img {
+        filter: drop-shadow(0px 0px 50px #2b174bb9);
+      }
+      .button {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 1;
+        border: none !important;
+        font-size: medium;
+        padding: 15px 30px !important;
+        /* box-shadow: 0px 0px 10px #2a7a8a; */
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgba(13, 20, 174, 1) 0%,
+          rgb(101, 66, 131) 90%
+        );
+      }
+
+      .button::before,
+      .button::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        transform: skew(15deg);
+        transition: all 0.5s;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .button::before {
+        left: -10px;
+        background: #4528a1;
+      }
+
+      .button::after {
+        right: -10px;
+        background: #6048af;
+      }
+
+      .button:hover::before,
+      .button:hover::after {
+        width: 58%;
+      }
+
+      .li {
+        padding: 5px 30px;
+        font-size: 16px;
+        cursor: pointer;
+        color: black;
+        position: relative;
+        transition: transform 0.5s ease;
+        transform-origin: left;
+        z-index: 1;
+      }
+      .li::after {
+        content: "";
+        position: absolute;
+        background-color: #34275f;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s ease;
+      }
+      .li:hover::after {
+        transform: scaleX(1);
+        transition: transform 0.5s ease;
+        transform-origin: left;
+      }
+      .hero_col h1 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .floating-image {
+        position: relative;
+        animation: floatAnimation 3s ease-in-out infinite;
+      }
+
+      @keyframes floatAnimation {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-25px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      .primary-color {
+        color: #b190e0;
+      }
+      .nftCard {
+        background: linear-gradient(233deg, #ffffff1f, #2e223ce3, #2d1846e3);
+        backdrop-filter: blur(30px);
+        border-radius: 20px !important;
+      }
+      .card_icon {
+        background-color: #29728136;
+        padding: 20px 21px;
+      }
+      .about_col h1 {
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .about_col img {
+        filter: drop-shadow(0px 0px 50px #8447a762);
+      }
+      .social_icon {
+        background: -webkit-linear-gradient(#917add, #424242);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .footer_li {
+        color: #917add !important;
+      }
+      .footer_li:hover {
+        color: #735eb8 !important;
+      }
+      .Eclipse {
+        left: 0;
+        z-index: -1;
+      }
+      .Eclipse-2 {
+        right: 0;
+        z-index: -1;
+      }
+
+      @media only screen and (min-width: 52px) and (max-width: 992px) {
+        .navbar_body {
+          background-color: #000000;
+        }
+      }
+    </style>
+    <style>
+      .custom-shape-divider-bottom-1693304418 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+      }
+
+      .custom-shape-divider-bottom-1693304418 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 78px;
+      }
+
+      .custom-shape-divider-bottom-1693304418 .shape-fill {
+        fill: #190f3b;
+      }
+      .shape {
+        background: rgb(34, 193, 195);
+        background: linear-gradient(
+          0deg,
+          rgba(34, 193, 195, 0) 0%,
+          rgba(25, 15, 59, 1) 100%
+        );
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid p-0">
+      <div class="position-relative">
+        <img
+          src="eclipse.jpg"
+          class="img-fluid position-fixed Eclipse"
+          alt=""
+        />
+        <img
+          src="eclipse.jpg"
+          class="img-fluid position-fixed Eclipse-2"
+          alt=""
+        />
+      </div>
+      <div id="home">
+        <header
+          id="header"
+          class="header navbar navbar-expand-lg px-lg-5 py-3 px-3 z-3"
+        >
+          <div class="container-fluid px-0">
+            <a href="/metaverse_3" class="navbar-brand pe-3">
+              <img
+                src="meta-logo.png"
+                width="180"
+                class="img-fluid"
+              />
+            </a>
+            <div id="navbarNav" class="offcanvas offcanvas-end">
+              <div class="offcanvas-header border-bottom navbar_body">
+                <h5 class="offcanvas-title text-white">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body navbar_body">
+                <ul class="navbar-nav mx-auto gap-3 mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a
+                      href="/metaverse_3"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="#Ecosystem"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Eco System</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="/packages_2"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Packages</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a href="/about_2" class="nav-link li px-3 py-1 text-white"
+                      >About us</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="navbar-toggler"
+              style="filter: invert(1)"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a
+              href="../../../loginpage"
+              class="d-none d-lg-inline-flex text-decoration-none border rounded-5 px-5 py-2 text-white fw-semibold button"
+              target="_blank"
+              rel="noopener"
+            >
+              Login
+            </a>
+          </div>
+        </header>
+        <div class="container-fluid mt-lg-0 mt-md-0 mt-4">
+          <div class="container-xxl">
+            <div class="row mx-0 p-lg-5 px-0">
+              <div
+                class="col-lg-6 p-lg-4 px-2 hero mt-lg-4"
+                data-aos="fade-right"
+                data-aos-duration="1500"
+              >
+                <h1
+                  class="fw-bolder mb-0 text-white text-lg-start text-md-start display-3"
+                >
+                About Us
+                </h1>
+                <h3
+                  class="mb-4 primary-color text-opacity-75 text-lg-start text-md-start"
+                >
+                Innovation's New Horizon
+                </h3>
+                <p
+                  class="text-white text-opacity-75 text-lg-start text-md-start mb-4"
+                >
+                We are dedicated to crafting immersive digital experiences that transcend the boundaries of reality. As pioneers in the metaverse landscape, our mission is to create a seamless convergence between the virtual and physical worlds, redefining the way we live, work, and play.
+                </p>
+                <div
+                  class="d-lg-flex align-items-center d-md-flex gap-lg-3 gap-md-3 gap-3 d-grid mt-4 pt-2"
+                >
+                  <a
+                    href=" "
+                    class="btn btn-lg text-decoration-none border rounded-5 px-4 py-2 text-white button"
+                  >
+                    View in OPENSEA
+                  </a>
+                </div>
+              </div>
+              <div
+                class="col-lg mt-lg-4 px-lg-3"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
+                <div class="hero-bg">
+                  <img
+                    src="meta-about-9.png"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mx-0 px-0 position-relative">
+          <div class="custom-shape-divider-bottom-1693304418 px-0">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+                opacity=".25"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+                opacity=".5"
+                class="shape-fill"
+              ></path>
+              <path
+                d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
+          <div class="p-5 shape position-absolute"></div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl pt-5">
+          <div
+            class="row mx-0 py-lg-5 px-lg-3 p-md-4 px-0 my-lg-5 my-5 position-relative"
+          >
+            <div class="">
+              <img
+                src="{% static 'assets/images/bg-asset/image-5.png' %}"
+                class="img-fluid mt-5 position-absolute asset_1 floating-image"
+                alt=""
+              />
+              <img
+                src="{% static 'assets/images/bg-asset/image-5.png' %}"
+                class="img-fluid mt-5 position-absolute asset_2 floating-image"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="500"
+            >
+              <h1 class="primary-color fw-bolder display-3">10+</h1>
+              <p class="text-white text-opacity-75 mt-3">Years Experience</p>
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="500"
+            >
+              <h1 class="primary-color fw-bolder display-3">4,000+</h1>
+              <p class="text-white text-opacity-75 mt-3">Wallets Connected</p>
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
+              <h1 class="primary-color fw-bolder display-3">20,000+</h1>
+              <p class="text-white text-opacity-75 mt-3">
+                Collections Indexed every 5 mins.
+              </p>
+            </div>
+            <div
+              class="col-lg col-md col-12 text-center"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <h1 class="primary-color fw-bolder display-3">2.5x</h1>
+              <p class="text-white text-opacity-75 mt-3">
+                Difference in Floor & Estimated Value
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div
+            class="row mx-0 p-lg-5 p-md-4 px-0 flex-row-reverse justify-content-center align-items-center"
+          >
+          <div class="col-lg-6 col-md-6 col-12 d-flex align-items-center justify-content-end">
+            <div class="about_col">
+              <img
+                data-aos="fade-left"
+                data-aos-duration="1000"
+                src="meta-about-7.png"
+                class="img-fluid"
+                width="500"
+                alt=""
+              />
+            </div>
+          </div>
+            <div class="col-lg-6 col-md-6 col-12">
+              <h1
+                class="text-white fw-semibold"
+                data-aos="fade-right"
+                data-aos-duration="500"
+              >
+                What We Do
+              </h1>
+              <p
+                class="text-white-50 mt-4"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                Through cutting-edge technologies and creative ingenuity, we are
+                shaping a metaverse that offers a spectrum of experiences. From
+                sprawling virtual landscapes to intricate digital marketplaces,
+                we are at the forefront of designing environments that cater to
+                diverse interests and passions. Our commitment to user-centric
+                design drives us to create intuitive interfaces, seamless
+                interactions, and awe-inspiring visuals that captivate and
+                engage.
+              </p>
+              <a
+                data-aos="fade-right"
+                data-aos-duration="1000"
+                href=" "
+                class="btn btn-lg text-decoration-none border rounded-5 px-4 py-2 text-white button mt-4"
+              >
+                See More
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 align-items-center p-lg-5 p-md-4 px-0">
+            <div
+              class="col-lg-6 col-md-6 col-12 about_col mt-lg-0 mt-md-0 mt-5"
+            >
+              <img
+                data-aos="fade-right"
+                data-aos-duration="500"
+                src="meta-about-8.png"
+                class="img-fluid"
+                width="500"
+                alt=""
+              />
+            </div>
+            <div
+              class="col-lg-6 col-md-6 col-12 about_col mb-4 mt-lg-0 mt-md-0 mt-5"
+            >
+              <div class="mt-3 pt-2">
+                <h1
+                  class="text-white fw-semibold mt-3"
+                  data-aos="fade-left"
+                  data-aos-duration="1000"
+                >
+                  Join Us on this Journey
+                </h1>
+                <p
+                  class="text-white-50 fs-5 mt-3"
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                >
+                  We invite you to join us in shaping the metaverse of tomorrow.
+                  Whether you're an artist, a developer, a dreamer, or a
+                  visionary, there's a place for you within our metaverse
+                  community. Together, we will push the boundaries of what's
+                  possible and create a digital tapestry that reflects the
+                  beauty and diversity of the human experience.
+                </p>
+                <button
+                  class="btn btn-lg button border border-white rounded-5 px-5 mt-4 text-white"
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                >
+                  See More
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container-xxl">
+          <div class="row mx-0 p-lg-5 p-md-4 px-0">
+            <div class="col">
+              <p class="primary-color">What Our Client Says</p>
+              <h1 class="text-white fw-semibold">Testimonials</h1>
+            </div>
+            <div
+              class="swiper p-3 mt-5"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              <div class="swiper-wrapper">
+                <div class="swiper-slide h-100">
+                  <div class="card h-100 nftCard p-4 border-0">
+                    <div
+                      class="card-body d-flex flex-column justify-content-between p-0"
+                    >
+                      <span
+                        class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4"
+                      >
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <p class="text-white mt-3">
+                        Working with BST Meta has been an absolute game-changer
+                        for our business. Their metaverse solutions opened up
+                        new avenues for engagement and interaction, redefining
+                        our customer experience.
+                      </p>
+                      <div
+                        class="row align-items-center ps-2 pt-4 border-top border-white border-opacity-25"
+                      >
+                        <div class="col-3 px-1">
+                          <img
+                            src="01.jpg"
+                            class="img-fluid rounded-circle"
+                          />
+                        </div>
+                        <div
+                          class="col ps-2 d-flex flex-column justify-content-center"
+                        >
+                          <h6 class="fs-sm text-white mb-0">Robert Fox</h6>
+                          <p class="small text-white text-opacity-75 mt-2 mb-0">
+                            Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card h-100 nftCard p-4 border-0">
+                    <div
+                      class="card-body d-flex flex-column justify-content-between p-0"
+                    >
+                      <span
+                        class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4"
+                      >
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <p class="text-white mt-3">
+                        Innovation knows no bounds with BST Meta. Their ability
+                        to fuse technology and imagination has elevated our
+                        brand presence in the metaverse, giving our audience an
+                        unforgettable experience.
+                      </p>
+                      <div
+                        class="row align-items-center ps-2 pt-4 border-top border-white border-opacity-25"
+                      >
+                        <div class="col-3 px-1">
+                          <img
+                            src="02.jpg"
+                            class="img-fluid rounded-circle"
+                          />
+                        </div>
+                        <div
+                          class="col ps-2 d-flex flex-column justify-content-center"
+                        >
+                          <h6 class="fs-sm text-white mb-0">Jerome</h6>
+                          <p class="small text-white text-opacity-75 mt-2 mb-0">
+                            Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card h-100 nftCard p-4 border-0">
+                    <div
+                      class="card-body d-flex flex-column justify-content-between p-0"
+                    >
+                      <span
+                        class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4"
+                      >
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <p class="text-white mt-3">
+                        "Partnering with BST Meta was a visionary decision.
+                        Their metaverse expertise breathed life into our ideas,
+                        and the result was beyond our expectations.
+                      </p>
+                      <div
+                        class="row align-items-center ps-2 pt-4 border-top border-white border-opacity-25"
+                      >
+                        <div class="col-3 px-1">
+                          <img
+                            src="03.jpg"
+                            class="img-fluid rounded-circle"
+                          />
+                        </div>
+                        <div
+                          class="col ps-2 d-flex flex-column justify-content-center"
+                        >
+                          <h6 class="fs-sm text-white mb-0">Annete</h6>
+                          <p class="small text-white text-opacity-75 mt-2 mb-0">
+                            Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card h-100 nftCard p-4 border-0">
+                    <div
+                      class="card-body d-flex flex-column justify-content-between p-0"
+                    >
+                      <span
+                        class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4"
+                      >
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <p class="text-white mt-3">
+                        Navigating the metaverse landscape was seamless with BST
+                        Meta as our guide. Their team's dedication to creating
+                        immersive digital environments ensured a truly immersive
+                        journey
+                      </p>
+                      <div
+                        class="row align-items-center ps-2 pt-4 border-top border-white border-opacity-25"
+                      >
+                        <div class="col-3 px-1">
+                          <img
+                            src="05.jpg"
+                            class="img-fluid rounded-circle"
+                          />
+                        </div>
+                        <div
+                          class="col ps-2 d-flex flex-column justify-content-center"
+                        >
+                          <h6 class="fs-sm text-white mb-0">Albert Lynch</h6>
+                          <p class="small text-white text-opacity-75 mt-2 mb-0">
+                            Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide h-100">
+                  <div class="card h-100 nftCard p-4 border-0">
+                    <div
+                      class="card-body d-flex flex-column justify-content-between p-0"
+                    >
+                      <span
+                        class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4"
+                      >
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <p class="text-white mt-3">
+                        Collaborating with BST Meta was a journey of innovation
+                        and discovery. Their metaverse solutions not only
+                        engaged our audience but left a lasting impact.
+                      </p>
+                      <div
+                        class="row align-items-center ps-2 pt-4 border-top border-white border-opacity-25"
+                      >
+                        <div class="col-3 px-1">
+                          <img
+                            src="06.jpg"
+                            class="img-fluid rounded-circle"
+                          />
+                        </div>
+                        <div
+                          class="col ps-2 d-flex flex-column justify-content-center"
+                        >
+                          <h6 class="fs-sm text-white mb-0">Benjamin</h6>
+                          <p class="small text-white text-opacity-75 mt-2 mb-0">
+                            Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        data-aos="fade"
+        data-aos-duration="1000"
+        class="footer container-fluid px-0 bg-secondary bg-opacity-10 pt-5 mt-5"
+      >
+        <div class="container-xxl px-0">
+          <div class="row mx-0 pb-5 px-lg-5 px-3">
+            <div class="col-lg-4 col-md-6">
+              <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+                <img
+                  src="meta-logo.png"
+                  width="180"
+                  alt="BST Meta"
+                />
+              </div>
+              <p class="text-white text-opacity-75 pb-lg-3 mb-4">
+                We make it easy to Discover, Invest and manage all your NFTs at
+                one place.
+              </p>
+              <div class="d-flex gap-3">
+                <a href="">
+                  <i class="fab fa-fw fa-facebook-square fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-linkedin-in fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-twitter fs-2 social_icon"></i>
+                </a>
+                <a href="">
+                  <i class="fab fa-fw fa-instagram fs-2 social_icon"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0"
+            >
+              <div id="footer-links" class="row">
+                <div class="col-lg col">
+                  <div
+                    id="useful-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg col">
+                  <div
+                    id="social-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg col">
+                  <div
+                    id="social-links"
+                    class="collapse d-lg-block"
+                    data-bs-parent="#footer-links"
+                  >
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Home</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Eco System</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >Packages</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          href=""
+                          class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                          >About us</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="nav d-block fs-xs text-center p-3">
+            <span class="text-white">© All rights reserved. Made by </span>
+            <a class="nav-link d-inline-block primary-color p-0" href=" "
+              >BST Meta</a
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        // Optional parameters
+
+        direction: "horizontal",
+        // loop: true,
+
+        // effect: "coverflow",
+        // coverflowEffect: {
+        //   rotate: 30,
+        //   slideShadows: false,
+        // },
+
+        // autoplay: {
+        //   delay: 4000,
+        // },
+        autoHeight: true,
+
+        // centeredSlides: true,
+        // centeredSlidesBounds: true,
+
+        slidesPerView: 5,
+        spaceBetween: 10,
+        // Responsive breakpoints
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        },
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+    <script>
+      VANTA.TOPOLOGY({
+        el: "#home",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x2e1d78,
+        backgroundColor: 0x0f051d,
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tree | BST-Meta</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+      body {
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          #180c49 0%,
+          #16072b 90%
+        );
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+      .button {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 1;
+        border: none !important;
+        font-size: medium;
+        padding: 15px 30px !important;
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgba(13, 20, 174, 1) 0%,
+          rgb(101, 66, 131) 90%
+        );
+      }
+
+      .button::before,
+      .button::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        transform: skew(15deg);
+        transition: all 0.5s;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .button::before {
+        left: -10px;
+        background: #4528a1;
+      }
+
+      .button::after {
+        right: -10px;
+        background: #6048af;
+      }
+
+      .button:hover::before,
+      .button:hover::after {
+        width: 58%;
+      }
+
+      .li {
+        padding: 5px 30px;
+        font-size: 16px;
+        cursor: pointer;
+        color: black;
+        position: relative;
+        transition: transform 0.5s ease;
+        transform-origin: left;
+        z-index: 1;
+      }
+      .li::after {
+        content: "";
+        position: absolute;
+        background-color: #34275f;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s ease;
+      }
+      .li:hover::after {
+        transform: scaleX(1);
+        transition: transform 0.5s ease;
+        transform-origin: left;
+      }
+      .primary-color {
+        color: #b190e0;
+      }
+      .social_icon {
+        background: -webkit-linear-gradient(#917add, #424242);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .footer_li {
+        color: #917add !important;
+      }
+      .footer_li:hover {
+        color: #735eb8 !important;
+      }
+      .package_bg {
+        background: url("{% static 'assets/images/bg-asset/image-6.png' %}");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .package_card {
+        background: linear-gradient(233deg, #ffffff1f, #2e223ce3, #2d1846e3);
+        backdrop-filter: blur(100px) !important;
+        border: none !important;
+        border-radius: 25px !important;
+        transition: all 500ms ease !important;
+      }
+      .package_card i {
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgb(47, 55, 209) 0%,
+          rgb(145, 73, 207) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      #Ecosystem {
+        overflow-x: hidden;
+      }
+      .Eclipse {
+        left: 0;
+        z-index: -1;
+      }
+      .Eclipse-2 {
+        right: 0;
+        z-index: -1;
+      }
+
+      @media only screen and (min-width: 52px) and (max-width: 992px) {
+        .navbar_body {
+          background-color: #000000;
+        }
+      }
+    </style>
+    <style>
+      /*----------------genealogy-scroll----------*/
+
+      .genealogy-scroll::-webkit-scrollbar {
+        width: 5px;
+        height: 8px;
+      }
+      .genealogy-scroll::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #e4e4e4;
+      }
+      .genealogy-scroll::-webkit-scrollbar-thumb {
+        background: #674ac7;
+        border-radius: 10px;
+        transition: 0.5s;
+      }
+      .genealogy-scroll::-webkit-scrollbar-thumb:hover {
+        background: #8973cf;
+        transition: 0.5s;
+      }
+
+      /*----------------genealogy-tree----------*/
+      .genealogy-body {
+        white-space: nowrap;
+        overflow-y: scroll;
+        padding: 50px;
+        padding-top: 10px;
+        text-align: center;
+      }
+      .genealogy-tree {
+        display: inline-block;
+      }
+      .genealogy-tree ul {
+        padding-top: 20px;
+        position: relative;
+        padding-left: 0px;
+        display: flex;
+        justify-content: center;
+      }
+      .genealogy-tree li {
+        text-align: center;
+        list-style-type: none;
+        position: relative;
+        padding: 20px 5px 0 5px;
+      }
+      .genealogy-tree li::before,
+      .genealogy-tree li::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 50%;
+        border-top: 2px solid #ccc;
+        width: 50%;
+        height: 18px;
+      }
+      .genealogy-tree li::after {
+        right: auto;
+        left: 50%;
+        border-left: 2px solid #ccc;
+      }
+      .genealogy-tree li:only-child::after,
+      .genealogy-tree li:only-child::before {
+        display: none;
+      }
+      .genealogy-tree li:only-child {
+        padding-top: 0;
+      }
+      .genealogy-tree li:first-child::before,
+      .genealogy-tree li:last-child::after {
+        border: 0 none;
+      }
+      .genealogy-tree li:last-child::before {
+        border-right: 2px solid #ccc;
+        border-radius: 0 5px 0 0;
+        -webkit-border-radius: 0 5px 0 0;
+        -moz-border-radius: 0 5px 0 0;
+      }
+      .genealogy-tree li:first-child::after {
+        border-radius: 5px 0 0 0;
+        -webkit-border-radius: 5px 0 0 0;
+        -moz-border-radius: 5px 0 0 0;
+      }
+      .genealogy-tree ul ul::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-left: 2px solid #ccc;
+        width: 0;
+        height: 20px;
+      }
+
+      /*--------------memeber-card-design----------*/
+      .member-view-box {
+        width: 150px;
+        margin: auto;
+        text-align: center;
+        position: relative;
+      }
+      .member-view-box img {
+        width: 60px;
+      }
+      .member-view-box .info {
+        display: none;
+      }
+      .member-details .info {
+        display: none;
+      }
+      .member-view-box:hover .info {
+        display: block;
+        position: absolute;
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgb(46, 53, 190) 0%,
+          rgb(101, 66, 131) 90%
+        );
+        left: -24%;
+        top: 65px;
+        z-index: 10;
+        border-radius: 15px;
+      }
+      .member-details:hover .info {
+        display: block;
+        position: absolute;
+        background-image: radial-gradient(
+          circle farthest-corner at -4.5% 34.3%,
+          rgba(13, 20, 174, 1) 0%,
+          rgb(101, 66, 131) 90%
+        );
+        left: -24%;
+        top: 65px;
+        z-index: 10;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid p-0">
+      <div class="container-xxl px-0">
+        <header
+          id="header"
+          class="header navbar navbar-expand-lg px-lg-5 py-3 px-3 z-3"
+        >
+          <div class="container-fluid px-0">
+            <a href="/metaverse_3" class="navbar-brand pe-3">
+              <img src="meta-logo.png" width="180" class="img-fluid" />
+            </a>
+            <div id="navbarNav" class="offcanvas offcanvas-end">
+              <div class="offcanvas-header border-bottom navbar_body">
+                <h5 class="offcanvas-title text-white">Menu</h5>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body navbar_body">
+                <ul class="navbar-nav mx-auto gap-3 mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a
+                      href="/metaverse_3"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="#Ecosystem"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Eco System</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      href="/packages_2"
+                      class="nav-link li px-3 py-1 text-white"
+                      >Packages</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a href="/about_2" class="nav-link li px-3 py-1 text-white"
+                      >About us</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="navbar-toggler"
+              style="filter: invert(1)"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a
+              href="../../../loginpage"
+              class="d-none d-lg-inline-flex text-decoration-none border rounded-5 px-5 py-2 text-white fw-semibold button"
+              target="_blank"
+              rel="noopener"
+            >
+              Login
+            </a>
+          </div>
+        </header>
+        <div class="container-fluid">
+          <div class="container-xxl">
+            <div class="row mx-0 px-lg-2 py-lg-5 p-md-4 px-0 py-5">
+              <div class="col-12 mx-auto p-0">
+                <div class="body genealogy-body genealogy-scroll">
+                  <div class="genealogy-tree">
+                    <ul>
+                      <li>
+                        <div
+                          class="member-view-box d-flex flex-column align-items-center gap-2"
+                        >
+                          <img
+                            src="01.jpg"
+                            class="img-fluid rounded-circle image"
+                            alt=""
+                          />
+                          <p class="text-white mb-0">John</p>
+                          <div class="py-3 px-4 info">
+                            <div class="d-flex gap-2">
+                              <p class="text-white mb-0 fw-semibold">Name:</p>
+                              <p class="text-white mb-0 text-opacity-75">
+                                John
+                              </p>
+                            </div>
+                            <div class="d-flex gap-2 my-2">
+                              <p class="text-white mb-0 fw-semibold">
+                                Total Business:
+                              </p>
+                              <p class="text-white mb-0 text-opacity-75">
+                                XXXXX
+                              </p>
+                            </div>
+                            <div class="d-flex gap-2 my-2">
+                              <p class="text-white mb-0 fw-semibold">
+                                Address:
+                              </p>
+                              <p class="text-white mb-0 text-opacity-75">
+                                XXXXX
+                              </p>
+                            </div>
+                            <div class="d-flex gap-2 my-2">
+                              <p class="text-white mb-0 fw-semibold">
+                                Total Income:
+                              </p>
+                              <p class="text-white mb-0 text-opacity-75">
+                                000000
+                              </p>
+                            </div>
+                            <div class="d-flex gap-2">
+                              <p class="text-white mb-0 fw-semibold">
+                                Total Team:
+                              </p>
+                              <p class="text-white mb-0 text-opacity-75">
+                                XXXXX
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <ul class="active">
+                          <li>
+                            <div class="member-view-box">
+                              <div
+                                class="member-details d-flex flex-column align-items-center gap-2"
+                              >
+                                <img
+                                  src="02.jpg"
+                                  class="img-fluid rounded-circle image"
+                                  alt=""
+                                />
+                                <p class="text-white mb-0">Nick</p>
+                                <div class="py-3 px-4 info">
+                                  <div class="d-flex gap-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Name:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      Nick
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Business:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Address:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Income:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      000000
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Team:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="member-view-box">
+                                  <div
+                                    class="member-details d-flex flex-column align-items-center gap-2"
+                                  >
+                                    <img
+                                      src="06.jpg"
+                                      class="img-fluid rounded-circle image"
+                                      alt=""
+                                    />
+                                    <p class="text-white mb-0">Anna</p>
+                                    <div class="py-3 px-4 info">
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Name:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          Anna
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Business:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Address:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Income:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          000000
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Team:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="06.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">Anna</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              Anna
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="01.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">David</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              David
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="member-view-box">
+                                  <div
+                                    class="member-details d-flex flex-column align-items-center gap-2"
+                                  >
+                                    <img
+                                      src="01.jpg"
+                                      class="img-fluid rounded-circle image"
+                                      alt=""
+                                    />
+                                    <p class="text-white mb-0">David</p>
+                                    <div class="py-3 px-4 info">
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Name:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          David
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Business:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Address:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Income:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          000000
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Team:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="04.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">Ash</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              Ash
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="05.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">Ron</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              Ron
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="member-view-box">
+                                  <div
+                                    class="member-details d-flex flex-column align-items-center gap-2"
+                                  >
+                                    <img
+                                      src="01.jpg"
+                                      class="img-fluid rounded-circle image"
+                                      alt=""
+                                    />
+                                    <p class="text-white mb-0">David</p>
+                                    <div class="py-3 px-4 info">
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Name:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          David
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Business:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Address:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Income:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          000000
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Team:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <div class="member-view-box">
+                              <div
+                                class="member-details d-flex flex-column align-items-center gap-2"
+                              >
+                                <img
+                                  src="03.jpg"
+                                  class="img-fluid rounded-circle image"
+                                  alt=""
+                                />
+                                <p class="text-white mb-0">Jessica</p>
+                                <div class="py-3 px-4 info">
+                                  <div class="d-flex gap-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Name:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      Jessica
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Business:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Address:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2 my-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Income:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      000000
+                                    </p>
+                                  </div>
+                                  <div class="d-flex gap-2">
+                                    <p class="text-white mb-0 fw-semibold">
+                                      Total Team:
+                                    </p>
+                                    <p class="text-white mb-0 text-opacity-75">
+                                      XXXXX
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="member-view-box">
+                                  <div
+                                    class="member-details d-flex flex-column align-items-center gap-2"
+                                  >
+                                    <img
+                                      src="04.jpg"
+                                      class="img-fluid rounded-circle image"
+                                      alt=""
+                                    />
+                                    <p class="text-white mb-0">Ash</p>
+                                    <div class="py-3 px-4 info">
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Name:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          Ash
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Business:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Address:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Income:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          000000
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Team:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="01.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">John</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              John
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="01.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">John</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              John
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="member-view-box">
+                                  <div
+                                    class="member-details d-flex flex-column align-items-center gap-2"
+                                  >
+                                    <img
+                                      src="05.jpg"
+                                      class="img-fluid rounded-circle image"
+                                      alt=""
+                                    />
+                                    <p class="text-white mb-0">Ron</p>
+                                    <div class="py-3 px-4 info">
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Name:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          Ron
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Business:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Address:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2 my-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Income:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          000000
+                                        </p>
+                                      </div>
+                                      <div class="d-flex gap-2">
+                                        <p class="text-white mb-0 fw-semibold">
+                                          Total Team:
+                                        </p>
+                                        <p
+                                          class="text-white mb-0 text-opacity-75"
+                                        >
+                                          XXXXX
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="02.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">Shawn</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              Shawn
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="member-view-box">
+                                      <div
+                                        class="member-details d-flex flex-column align-items-center gap-2"
+                                      >
+                                        <img
+                                          src="06.jpg"
+                                          class="img-fluid rounded-circle image"
+                                          alt=""
+                                        />
+                                        <p class="text-white mb-0">Laura</p>
+                                        <div class="py-3 px-4 info">
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Name:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              Laura
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Business:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Address:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2 my-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Income:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              000000
+                                            </p>
+                                          </div>
+                                          <div class="d-flex gap-2">
+                                            <p
+                                              class="text-white mb-0 fw-semibold"
+                                            >
+                                              Total Team:
+                                            </p>
+                                            <p
+                                              class="text-white mb-0 text-opacity-75"
+                                            >
+                                              XXXXX
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer
+          data-aos="fade"
+          data-aos-duration="1000"
+          class="footer container-fluid px-0 bg-secondary bg-opacity-10 pt-5"
+        >
+          <div class="container-xxl px-0">
+            <div class="row mx-0 pb-5 px-lg-5 px-3">
+              <div class="col-lg-4 col-md-6">
+                <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+                  <img src="meta-logo.png" width="180" alt="BST Meta" />
+                </div>
+                <p class="text-white text-opacity-75 pb-lg-3 mb-4">
+                  We make it easy to Discover, Invest and manage all your NFTs
+                  at one place.
+                </p>
+                <div class="d-flex gap-3">
+                  <a href="">
+                    <i
+                      class="fab fa-fw fa-facebook-square fs-2 social_icon"
+                    ></i>
+                  </a>
+                  <a href="">
+                    <i class="fab fa-fw fa-linkedin-in fs-2 social_icon"></i>
+                  </a>
+                  <a href="">
+                    <i class="fab fa-fw fa-twitter fs-2 social_icon"></i>
+                  </a>
+                  <a href="">
+                    <i class="fab fa-fw fa-instagram fs-2 social_icon"></i>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0"
+              >
+                <div id="footer-links" class="row">
+                  <div class="col-lg col">
+                    <div
+                      id="useful-links"
+                      class="collapse d-lg-block"
+                      data-bs-parent="#footer-links"
+                    >
+                      <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Home</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Eco System</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Packages</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >About us</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg col">
+                    <div
+                      id="social-links"
+                      class="collapse d-lg-block"
+                      data-bs-parent="#footer-links"
+                    >
+                      <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Home</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Eco System</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Packages</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >About us</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg col">
+                    <div
+                      id="social-links"
+                      class="collapse d-lg-block"
+                      data-bs-parent="#footer-links"
+                    >
+                      <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Home</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Eco System</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >Packages</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            href=""
+                            class="nav-link d-inline-block text-white px-0 pt-1 pb-2 footer_li"
+                            >About us</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="nav d-block fs-xs text-center p-3">
+              <span class="text-white">© All rights reserved. Made by </span>
+              <a class="nav-link d-inline-block primary-color p-0" href=" "
+                >BST Meta</a
+              >
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(function () {
+        $(".genealogy-tree ul").hide();
+        $(".genealogy-tree>ul").show();
+        $(".genealogy-tree ul.active").show();
+        $(".genealogy-tree li").on("click", function (e) {
+          var children = $(this).find("> ul");
+          if (children.is(":visible"))
+            children.hide("fast").removeClass("active");
+          else children.show("fast").addClass("active");
+          e.stopPropagation();
+        });
+      });
+    </script>
+  </body>
+</html>
